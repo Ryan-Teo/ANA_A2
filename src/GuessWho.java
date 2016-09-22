@@ -216,7 +216,7 @@ class MoveLog
      * Constructor, that sets output to be written to a log file as well as System.out.
      *
      * @param outFilename The name of the file to write game log output to.
-     * @throws IOException When there are IO issues from openning file.
+     * @throws IOException When there are IO issues from opening file.
      */
     public MoveLog(String outFilename) throws IOException {
         // automatically flush
