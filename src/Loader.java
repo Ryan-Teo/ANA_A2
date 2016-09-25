@@ -70,6 +70,33 @@ public class Loader {
 			}
 			
 		}
+		br.close();
+		fr.close();
 		return people;
 	}
+
+	Map<String, ArrayList<String>> loadOptions() throws IOException{
+		String line, token, list;
+		Map<String, ArrayList<String>> options = new HashMap<String, ArrayList<String>>();
+		FileReader fr = new FileReader("game1.config");
+		BufferedReader br = new BufferedReader(fr);
+		while((line=br.readLine()) != null){
+			if(line.equals("")){
+				break;
+			}
+			ArrayList<String> optionList = new ArrayList<String>();
+			StringTokenizer st = new StringTokenizer(line);
+			list = st.nextToken();
+			while(st.hasMoreTokens()){
+				optionList.add(st.nextToken());
+			}
+			System.out.println(">>>>" + optionList.size());
+			options.put(list, optionList);
+			System.out.println(options.get(list).size());
+		}
+		br.close();
+		fr.close();
+		return options;
+	}
+
 }
