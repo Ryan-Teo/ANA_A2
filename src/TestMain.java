@@ -3,7 +3,7 @@ import java.util.*;
 
 public class TestMain {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		Loader load = new Loader();
 		Helper help = new Helper(); 
 		ArrayList<Person> people;
@@ -36,6 +36,9 @@ public class TestMain {
 		}
 		
 		System.out.println(help.getRandom(5));
+		
+		Player player1 = null;
+		player1 = new RandomGuessPlayer("game1.config", "P3");
 		
 	}
 

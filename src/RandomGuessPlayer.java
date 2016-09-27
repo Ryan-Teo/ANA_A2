@@ -47,7 +47,7 @@ public class RandomGuessPlayer implements Player
 
     public Guess guess() {
     	Guess.GuessType mType = null;
-    	String mAttribute = null, mValue = null;
+    	String mAttribute = "", mValue = "";
     	int listSize = 0;
     	
     	if (people.size() == 1){
@@ -59,7 +59,7 @@ public class RandomGuessPlayer implements Player
     		do{
 	    		mType = Guess.GuessType.Attribute;
 	    		mAttribute = attributes.get(help.getRandom(attributes.size()));
-	    		listSize = options.get(mAttribute).size() ;
+	    		listSize = options.get(mAttribute).size();
 	    		mValue = options.get(mAttribute).get(help.getRandom(listSize));
     		}while (listSize == 1 || mAttribute.equals("name"));
     		// delete from attributes & person
@@ -95,15 +95,16 @@ public class RandomGuessPlayer implements Player
 
 
 	public boolean receiveAnswer(Guess currGuess, boolean answer) {
-		boolean bool = false;
     	String mAttribute = currGuess.getAttribute();
     	String mValue = currGuess.getValue();
     	Guess.GuessType mType = currGuess.getType();
+    	ArrayList<Person> peopleRemove = new ArrayList<Person>();
+    	ArrayList<String> optionRemove = new ArrayList<String>();
 		if(mType.equals(Guess.GuessType.Person)){
 			// If current guess was a person guess
 			if(answer==true){
 				//Return true if person is correct
-				bool = true;
+				return true;
 			}
 		}
 		else{
@@ -113,17 +114,26 @@ public class RandomGuessPlayer implements Player
 				// Delete all people without attribute
 				for(Person person : people){
 					if(!person.getAttr(mAttribute).equals(mValue)){
-						people.remove(person);
+						peopleRemove.add(person);
 					}
 				}
+				// Delete all unnecessary people
+				people.removeAll(peopleRemove);
 			}
 			else{
+				// If answer is false
 				// Attribute guessed wrongly
 				// Delete wrong guess from options to choose from
-				
+				for(String attrVal : options.get(mAttribute)){
+					if(attrVal.equals(mValue)){
+						optionRemove.add(attrVal);
+					}
+				}
+				// Delete all unnecessary options
+				options.get(mAttribute).removeAll(optionRemove);
 			}
 		}
-        return bool;
+        return false;
     } // end of receiveAnswer()
 
 } // end of class RandomGuessPlayer
