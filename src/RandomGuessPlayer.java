@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Random guessing player.
@@ -12,6 +13,7 @@ public class RandomGuessPlayer implements Player
 {
 	Loader load = new Loader();
 	ArrayList<Person> people;
+	Map<String, ArrayList<String>> options;
 	Person person;
     /**
      * Loads the game configuration from gameFilename, and also store the chosen
@@ -34,13 +36,14 @@ public class RandomGuessPlayer implements Player
     			break;
     		}
     	}
+    	this.options = load.getOptions();
     } // end of RandomGuessPlayer()
 
 
     public Guess guess() {
-    	Guess newGuess = new Guess(null, null, null);
     	Guess.GuessType mType = null;
     	String mAttribute = null, mValue = null;
+    	
     	
     	if (people.size() == 1){
     		mType = Guess.GuessType.Person;
@@ -48,7 +51,9 @@ public class RandomGuessPlayer implements Player
     		mValue = people.get(0).getName();
     	}
     	else{
-    		
+    		for(Map.Entry<String, ArrayList<String>> entry : options.entrySet()){
+    			
+    		}
     	}
     	
     	
