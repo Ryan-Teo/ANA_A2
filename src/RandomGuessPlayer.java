@@ -33,7 +33,7 @@ public class RandomGuessPlayer implements Player
     {
     	this.people = load.loadPeople(gameFilename);
     	for(Person personEntry : this.people){
-    		if(personEntry.getName().equals(chosenName)){
+    		if(personEntry.getAttr("name").equals(chosenName)){
     			this.person = personEntry;
     			break;
     		}
@@ -53,13 +53,14 @@ public class RandomGuessPlayer implements Player
     	if (people.size() == 1){
     		mType = Guess.GuessType.Person;
     		mAttribute = "";
-    		mValue = people.get(0).getName();
+    		mValue = people.get(0).getAttr("name");
     	}
     	else{
     		mType = Guess.GuessType.Attribute;
     		mAttribute = attributes.get(help.getRandom(attributes.size()));
     		mValue = options.get(mAttribute).get(help.getRandom(options.get(mAttribute).size()));
-    		//delete from attributes & options if list size == 0 & person
+    		//delete from attributes & person
+    		//options if list size == 1, cannot guess that option ( while loop)
     	}
     	
         return new Guess(mType, mAttribute, mValue);
@@ -67,14 +68,29 @@ public class RandomGuessPlayer implements Player
 
 
     public boolean answer(Guess currGuess) {
-
+    	String mAttribute = currGuess.getAttribute();
+    	String mValue = currGuess.getValue();
+    	Guess.GuessType mType = currGuess.getType();
+    	//check if the guess was correct
+    	if(mAttribute.equals("") && mType.equals(Guess.GuessType.Person)){
+    		//Guessing person
+    	}
+    	else{
+    		for(String attr : attributes){
+        		if(mAttribute.equals(attr)){
+        			if(mValue.equals(this.person.getAttr(attr))){
+        				
+        			}
+        		}
+    		}
+    	}
         // placeholder, replace
         return false;
     } // end of answer()
 
 
 	public boolean receiveAnswer(Guess currGuess, boolean answer) {
-
+		//delete shit here
         // placeholder, replace
         return true;
     } // end of receiveAnswer()

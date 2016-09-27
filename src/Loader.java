@@ -20,6 +20,7 @@ public class Loader {
 			}
 			else{
 				name = line;
+				addOptions ("name", name);
 				while((line=br.readLine()) != null){
 					if(line.equals("")){
 						break;

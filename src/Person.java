@@ -16,43 +16,78 @@ public class Person {
 		this.faceShape = faceShape;
 	}
 
-	public String getName() {
+	private String getName() {
 		return name;
 	}
 
-	public String getHairLength() {
+	private String getHairLength() {
 		return hairLength;
 	}
 
-	public String getGlasses() {
+	private String getGlasses() {
 		return glasses;
 	}
 
-	public String getFacialHair() {
+	private String getFacialHair() {
 		return facialHair;
 	}
 
-	public String getEyeColor() {
+	private String getEyeColor() {
 		return eyeColor;
 	}
 
-	public String getPimples() {
+	private String getPimples() {
 		return pimples;
 	}
 
-	public String getHat() {
+	private String getHat() {
 		return hat;
 	}
 
-	public String getHairColor() {
+	private String getHairColor() {
 		return hairColor;
 	}
 
-	public String getNoseShape() {
+	private String getNoseShape() {
 		return noseShape;
 	}
 
-	public String getFaceShape() {
+	private String getFaceShape() {
 		return faceShape;
+	}
+	
+	public String getAttr(String attr){
+		String atrStr = null;
+		if(attr.equals("name")){
+			atrStr = getName();
+		}
+		else if(attr.equals("hairLength")){
+			atrStr = getHairLength();
+		}
+		else if(attr.equals("glasses")){
+			atrStr = getGlasses();
+		}
+		else if(attr.equals("facialHair")){
+			atrStr = getFacialHair();
+		}
+		else if(attr.equals("eyeColor")){
+			atrStr = getEyeColor();
+		}
+		else if(attr.equals("pimples")){
+			atrStr = getPimples();
+		}
+		else if(attr.equals("hat")){
+			atrStr = getHat();
+		}
+		else if(attr.equals("hairColor")){
+			atrStr = getHairColor();
+		}
+		else if(attr.equals("noseShape")){
+			atrStr = getNoseShape();
+		}
+		else if(attr.equals("faceShape")){
+			atrStr = getFaceShape();
+		}
+		return atrStr;
 	}
 }
