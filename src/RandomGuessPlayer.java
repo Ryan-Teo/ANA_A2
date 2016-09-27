@@ -38,7 +38,21 @@ public class RandomGuessPlayer implements Player
 
 
     public Guess guess() {
-
+    	Guess newGuess = new Guess(null, null, null);
+    	Guess.GuessType mType = null;
+    	String mAttribute = null, mValue = null;
+    	
+    	if (people.size() == 1){
+    		mType = Guess.GuessType.Person;
+    		mAttribute = null;
+    		mValue = people.get(0).getName();
+    	}
+    	else{
+    		
+    	}
+    	
+    	
+    	
         // placeholder, replace
         return new Guess(Guess.GuessType.Person, "", "Placeholder");
     } // end of guess()
