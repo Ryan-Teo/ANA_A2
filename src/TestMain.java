@@ -5,6 +5,7 @@ public class TestMain {
 
 	public static void main(String[] args) {
 		Loader load = new Loader();
+		Helper help = new Helper(); 
 		ArrayList<Person> people;
 		Map<String, ArrayList<String>> options;
 		
@@ -33,6 +34,9 @@ public class TestMain {
 			}
 			System.out.println();
 		}
+		
+		System.out.println(help.getRandom(5));
+		
 	}
 
 }

@@ -11,10 +11,12 @@ import java.util.Map;
  */
 public class RandomGuessPlayer implements Player
 {
+	Helper help = new Helper();
 	Loader load = new Loader();
 	ArrayList<Person> people;
 	Map<String, ArrayList<String>> options;
 	Person person;
+	ArrayList<String> attributes = new ArrayList<String>();
     /**
      * Loads the game configuration from gameFilename, and also store the chosen
      * person.
@@ -37,6 +39,9 @@ public class RandomGuessPlayer implements Player
     		}
     	}
     	this.options = load.getOptions();
+    	for(Map.Entry<String, ArrayList<String>> entry : options.entrySet()){
+    		attributes.add(entry.getKey());
+    	}
     } // end of RandomGuessPlayer()
 
 
@@ -47,19 +52,17 @@ public class RandomGuessPlayer implements Player
     	
     	if (people.size() == 1){
     		mType = Guess.GuessType.Person;
-    		mAttribute = null;
+    		mAttribute = "";
     		mValue = people.get(0).getName();
     	}
     	else{
-    		for(Map.Entry<String, ArrayList<String>> entry : options.entrySet()){
-    			
-    		}
+    		mType = Guess.GuessType.Attribute;
+    		mAttribute = attributes.get(help.getRandom(attributes.size()));
+    		mValue = options.get(mAttribute).get(help.getRandom(options.get(mAttribute).size()));
+    		//delete from attributes & options if list size == 0 & person
     	}
     	
-    	
-    	
-        // placeholder, replace
-        return new Guess(Guess.GuessType.Person, "", "Placeholder");
+        return new Guess(mType, mAttribute, mValue);
     } // end of guess()
 
 
