@@ -112,7 +112,9 @@ public class RandomGuessPlayer implements Player
 				// Attribute guessed correctly
 				// Delete all people without attribute
 				for(Person person : people){
-					
+					if(!person.getAttr(mAttribute).equals(mValue)){
+						people.remove(person);
+					}
 				}
 			}
 			else{
