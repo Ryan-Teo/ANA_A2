@@ -14,8 +14,8 @@ public class TestMain {
 			people = load.loadPeople("game1.config");
 			for(Person thisPerson : people){
 				System.out.printf("Name : %s\nHair Length : %s\nGlasses : %s\nFacial Hair : %s\nEye Color : %s\nPimples : %s\nHat : %s\nHair Color : %s\nNose Shape : %s\nFace Shape : %s\n-------------\n",
-									thisPerson.getName(), thisPerson.getHairLength(), thisPerson.getGlasses(), thisPerson.getFacialHair(), thisPerson.getEyeColor(), thisPerson.getPimples(),
-									thisPerson.getHat(), thisPerson.getHairColor(), thisPerson.getNoseShape(), thisPerson.getFaceShape());
+									thisPerson.getAttr("name"), thisPerson.getAttr("hairLength"), thisPerson.getAttr("glasses"), thisPerson.getAttr("facialHair"), thisPerson.getAttr("eyeColor"), thisPerson.getAttr("pimples"),
+									thisPerson.getAttr("hat"), thisPerson.getAttr("hairColor"), thisPerson.getAttr("noseShape"), thisPerson.getAttr("faceShape"));
 			}
 		}catch(IOException e){
 			System.out.println("Error occured : " + e.getMessage());

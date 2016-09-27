@@ -48,7 +48,7 @@ public class RandomGuessPlayer implements Player
     public Guess guess() {
     	Guess.GuessType mType = null;
     	String mAttribute = null, mValue = null;
-    	
+    	int listSize = 0;
     	
     	if (people.size() == 1){
     		mType = Guess.GuessType.Person;
@@ -56,11 +56,14 @@ public class RandomGuessPlayer implements Player
     		mValue = people.get(0).getAttr("name");
     	}
     	else{
-    		mType = Guess.GuessType.Attribute;
-    		mAttribute = attributes.get(help.getRandom(attributes.size()));
-    		mValue = options.get(mAttribute).get(help.getRandom(options.get(mAttribute).size()));
-    		//delete from attributes & person
-    		//options if list size == 1, cannot guess that option ( while loop)
+    		do{
+	    		mType = Guess.GuessType.Attribute;
+	    		mAttribute = attributes.get(help.getRandom(attributes.size()));
+	    		listSize = options.get(mAttribute).size() ;
+	    		mValue = options.get(mAttribute).get(help.getRandom(listSize));
+    		}while (listSize == 1 || mAttribute.equals("name"));
+    		// delete from attributes & person
+    		// options if  listSize == 1, cannot guess that option (while loop) || mAttribute.equals("name")
     	}
     	
         return new Guess(mType, mAttribute, mValue);
@@ -68,31 +71,57 @@ public class RandomGuessPlayer implements Player
 
 
     public boolean answer(Guess currGuess) {
+    	boolean bool = false;
     	String mAttribute = currGuess.getAttribute();
     	String mValue = currGuess.getValue();
     	Guess.GuessType mType = currGuess.getType();
-    	//check if the guess was correct
+    	// Check if the guess was correct
     	if(mAttribute.equals("") && mType.equals(Guess.GuessType.Person)){
-    		//Guessing person
-    	}
-    	else{
-    		for(String attr : attributes){
-        		if(mAttribute.equals(attr)){
-        			if(mValue.equals(this.person.getAttr(attr))){
-        				
-        			}
-        		}
+    		// Guessing person
+    		if(mValue.equals(this.person.getAttr("name"))){
+    			bool = true;
     		}
     	}
-        // placeholder, replace
-        return false;
+    	else{
+    		// Guessing attributes
+    		if(attributes.contains(mAttribute)){
+    			if(mValue.equals(this.person.getAttr(mAttribute))){
+    				bool = true;
+    			}
+    		}
+    	}
+        return bool;
     } // end of answer()
 
 
 	public boolean receiveAnswer(Guess currGuess, boolean answer) {
-		//delete shit here
-        // placeholder, replace
-        return true;
+		boolean bool = false;
+    	String mAttribute = currGuess.getAttribute();
+    	String mValue = currGuess.getValue();
+    	Guess.GuessType mType = currGuess.getType();
+		if(mType.equals(Guess.GuessType.Person)){
+			// If current guess was a person guess
+			if(answer==true){
+				//Return true if person is correct
+				bool = true;
+			}
+		}
+		else{
+			// Delete people and options here
+			if(answer == true){
+				// Attribute guessed correctly
+				// Delete all people without attribute
+				for(Person person : people){
+					
+				}
+			}
+			else{
+				// Attribute guessed wrongly
+				// Delete wrong guess from options to choose from
+				
+			}
+		}
+        return bool;
     } // end of receiveAnswer()
 
 } // end of class RandomGuessPlayer
