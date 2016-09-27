@@ -19,10 +19,7 @@ public class TestMain {
 		}catch(IOException e){
 			System.out.println("Error occured : " + e.getMessage());
 		}
-		
-		
-		
-		
+
 		//Options testing
 		try{
 			options = load.loadOptions();

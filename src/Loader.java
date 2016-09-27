@@ -4,8 +4,8 @@ import java.util.*;
 public class Loader {
 	
 	ArrayList<Person> loadPeople() throws IOException{
-		String line, token;
-		String name = null, hairLength = null, glasses = null, facialHair = null, eyeColor = null, pimples = null, hat = null, hairColor = null, noseShape = null, faceShape = null;
+		String line, token, name = null, hairLength = null, glasses = null, facialHair = null;
+		String eyeColor = null, pimples = null, hat = null, hairColor = null, noseShape = null, faceShape = null;
 		FileReader fr = new FileReader("game1.config");
 		BufferedReader br = new BufferedReader(fr);
 		ArrayList<Person> people = new ArrayList<Person>();
@@ -58,7 +58,6 @@ public class Loader {
 			Person person = new Person(name, hairLength, glasses, facialHair, eyeColor, pimples, hat, hairColor, noseShape, faceShape);
 			people.add(person);
 			}
-			
 		}
 		br.close();
 		fr.close();
