@@ -29,30 +29,39 @@ public class Loader {
 						token = st.nextToken();
 						if(token.equals("hairLength")){
 							hairLength = st.nextToken();
+							addOptions ("hairLength", hairLength);
 						}
 						else if(token.equals("glasses")){
 							glasses = st.nextToken();
+							addOptions ("glasses", glasses);
 						}
 						else if(token.equals("facialHair")){
 							facialHair = st.nextToken();
+							addOptions ("facialHair", facialHair);
 						}
 						else if(token.equals("eyeColor")){
 							eyeColor = st.nextToken();
+							addOptions ("eyeColor", eyeColor);
 						}
 						else if(token.equals("pimples")){
 							pimples = st.nextToken();
+							addOptions ("pimples", pimples);
 						}
 						else if(token.equals("hat")){
 							hat = st.nextToken();
+							addOptions ("hat", hat);
 						}
 						else if(token.equals("hairColor")){
 							hairColor = st.nextToken();
+							addOptions ("hairColor", hairColor);
 						}
 						else if(token.equals("noseShape")){
 							noseShape = st.nextToken();
+							addOptions ("noseShape", noseShape);
 						}
 						else if(token.equals("faceShape")){
 							faceShape = st.nextToken();
+							addOptions ("faceShape", faceShape);
 						}
 					}
 					
@@ -66,8 +75,19 @@ public class Loader {
 		return people;
 	}
 
-	private void addOptions(String attibute, String value) throws IOException{
-		
+	private void addOptions(String attribute, String value){
+		if(options.containsKey(attribute)){
+			//if attribute already has a list
+			if(!options.get(attribute).contains(value)){
+				//if value does not exist, add to list
+				options.get(attribute).add(value);
+			}
+		}
+		else{
+			ArrayList<String> optionList = new ArrayList<String>();
+			optionList.add(value);
+			options.put(attribute, optionList);
+		}
 	}
 
 	public Map<String, ArrayList<String>> getOptions() {
