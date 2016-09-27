@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * Random guessing player.
@@ -9,7 +10,9 @@ import java.io.*;
  */
 public class RandomGuessPlayer implements Player
 {
-
+	Loader load = new Loader();
+	ArrayList<Person> people;
+	Person person;
     /**
      * Loads the game configuration from gameFilename, and also store the chosen
      * person.
@@ -24,7 +27,13 @@ public class RandomGuessPlayer implements Player
     public RandomGuessPlayer(String gameFilename, String chosenName)
         throws IOException
     {
-
+    	this.people = load.loadPeople(gameFilename);
+    	for(Person personEntry : this.people){
+    		if(personEntry.getName().equals(chosenName)){
+    			this.person = personEntry;
+    			break;
+    		}
+    	}
     } // end of RandomGuessPlayer()
 
 
