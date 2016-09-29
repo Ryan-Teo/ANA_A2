@@ -1,10 +1,8 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 
 /**
  * Binary-search based guessing player.
@@ -70,19 +68,19 @@ public class BinaryGuessPlayer implements Player
     		//Loop for choosing the attribute
     		for(String attrKey : options.keySet()){
     			opNum.clear();
-    			if (attrKey.equals("name")){
+    			if(attrKey.equals("name")){
     				continue;
     			}
     			//Loop to iterate and count total of each option
-    			for (int i = 0; i < people.size(); i++){
+    			for(int i = 0; i < people.size(); i++){
     				String op = people.get(i).getAttr(attrKey);
-	    			if (op.equals("name")){
+	    			if(op.equals("name")){
 	    				break;
 	    			}
 	    			if(opNum.containsKey(op)){
 	    				opNum.put(op,opNum.get(op) + 1);
-	    			}	
-	    			else {
+	    			}
+	    			else{
 	    				opNum.put(op,(double) 1);
 	    			}
 	    		}
@@ -94,7 +92,7 @@ public class BinaryGuessPlayer implements Player
 					//Calculate difference between percent and 50%
 					double distance = Math.abs(percent - wantedPercent);
 					//break out of loop if percent is a perfect 50%
-					if (distance == 0){
+					if(distance == 0){
 						mAttribute = attrKey;
 			    		mValue = key;
 			    		return new Guess(mType, mAttribute, mValue);	
@@ -141,18 +139,18 @@ public class BinaryGuessPlayer implements Player
 		String mAttribute = currGuess.getAttribute();
     	String mValue = currGuess.getValue();
     	Guess.GuessType mType = currGuess.getType();
-    	ArrayList<Person> peopleRemove = new ArrayList<Person>();
-    	ArrayList<String> optionRemove = new ArrayList<String>();
 		if(mType.equals(Guess.GuessType.Person)){
 			// If current guess was a person guess
 			if(answer==true){
-				//Return true if person is correct
+				// Return true if person is correct
 				return true;
 			}
 		}
 		else{
 			// Delete people and options here
 			if(answer == true){
+				// If attribute guess was true
+				// Remove people that do not have the attribute
 				for (Iterator<Person> iterator = people.iterator(); iterator.hasNext();) {
 				    Person person = iterator.next();
 				    if (!person.getAttr(mAttribute).equals(mValue)) {
@@ -162,6 +160,8 @@ public class BinaryGuessPlayer implements Player
 				}
 			}
 			else{
+				// If attribute is wrong
+				// Remove people with the attribute
 				for (Iterator<Person> iterator = people.iterator(); iterator.hasNext();) {
 				    Person person = iterator.next();
 				    if (person.getAttr(mAttribute).equals(mValue)) {
