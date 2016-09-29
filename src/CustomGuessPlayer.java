@@ -52,8 +52,11 @@ public class CustomGuessPlayer implements Player
     public Guess guess() {
     	//Guess the most common attribute
     	Guess.GuessType mType = null;
-    	String mAttribute = null, mValue = null;
+    	String mAttribute = null, mValue = null, key = null, op = null;
     	opNum = new HashMap<String, Integer>();
+    	int highestOccur = 0, value = 0;
+    	
+    	
     	
     	//If one person left in array, guess Person
     	if (people.size() == 1){
@@ -66,13 +69,14 @@ public class CustomGuessPlayer implements Player
     		mType = Guess.GuessType.Attribute;
     		//Loop for choosing the attribute
     		for(String attrKey : options.keySet()){
+    			
     			opNum.clear();
     			if(attrKey.equals("name")){
     				continue;
     			}
     			//Loop to iterate and count total of each option
     			for(int i = 0; i < people.size(); i++){
-    				String op = people.get(i).getAttr(attrKey);
+    				op = people.get(i).getAttr(attrKey);
 	    			if(op.equals("name")){
 	    				break;
 	    			}
@@ -84,11 +88,11 @@ public class CustomGuessPlayer implements Player
 	    			}
 	    		}
     			//Take highest number
-    			int highestOccur = 0;
+    			
 				for(Map.Entry<String, Integer> entry : opNum.entrySet()){
-					String key = entry.getKey();
-					int value = entry.getValue();
-					if(value>highestOccur){
+					key = entry.getKey();
+					value = entry.getValue();
+					if(value>highestOccur && value != people.size()){
 						highestOccur = value;
 						mValue = key;
 						mAttribute = attrKey;
